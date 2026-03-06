@@ -16,7 +16,6 @@ body {
     padding: 20px;
 }
 
-/* --- App Layout --- */
 .app-container {
     display: flex;
     flex-direction: row;
