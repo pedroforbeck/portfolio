@@ -3,64 +3,124 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CSS Layout Playground</title>
+    <title>Advanced CSS Playground</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
-
-
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div class="app-container">
-    <!-- CONTROLS PANEL -->
+
+
     <div class="controls">
         <div class="header">
-            <h1>CSS Layouts</h1>
-            <p>Click the properties below to see how items rearrange smoothly.</p>
+            <h1>CSS Playground</h1>
+            <p>Scroll the playground on the right to test fixed elements!</p>
         </div>
 
-        <div class="control-group" data-property="flexDirection">
-            <h3>Direction</h3>
-            <div class="button-group">
-                <button class="active" data-value="row">Row (Left to Right)</button>
-                <button data-value="column">Column (Top to Down)</button>
+
+        <div class="control-section">
+            <h2>1. Positioning</h2>
+
+            <div class="control-group" data-target="mock-header" data-property="position">
+                <h3>Header Behavior</h3>
+                <div class="button-group">
+                    <button class="active" data-value="static">Static (Scrolls away)</button>
+                    <button data-value="fixed">Fixed (Sticks to top)</button>
+                </div>
+            </div>
+
+            <div class="control-group" data-target="mock-sidebar" data-property="position">
+                <h3>Lateral Menu Behavior</h3>
+                <div class="button-group">
+                    <button class="active" data-value="static">Static (Takes up space)</button>
+                    <button data-value="absolute">Absolute (Floats over content)</button>
+                </div>
             </div>
         </div>
 
-        <div class="control-group" data-property="justifyContent">
-            <h3>Justify Content (Main Axis)</h3>
-            <div class="button-group">
-                <button class="active" data-value="flex-start">Start</button>
-                <button data-value="center">Center</button>
-                <button data-value="flex-end">End</button>
-                <button data-value="space-between">Space Between</button>
-                <button data-value="space-around">Space Around</button>
+
+        <div class="control-section">
+            <h2>2. Z-Index (Layering)</h2>
+            <p class="hint">Boxes overlap. Watch the Pink Box jump to the front.</p>
+            <div class="control-group" data-target="box-1" data-property="zIndex">
+                <h3>Pink Box Z-Index</h3>
+                <div class="button-group">
+                    <button class="active" data-value="1">z-index: 1 (Back)</button>
+                    <button data-value="10">z-index: 10 (Front)</button>
+                </div>
             </div>
         </div>
 
-        <div class="control-group" data-property="alignItems">
-            <h3>Align Items (Cross Axis)</h3>
-            <div class="button-group">
-                <button class="active" data-value="stretch">Stretch</button>
-                <button data-value="flex-start">Start</button>
-                <button data-value="center">Center</button>
-                <button data-value="flex-end">End</button>
+
+        <div class="control-section">
+            <h2>3. Flexbox (Content Area)</h2>
+
+            <div class="control-group" data-target="flex-container" data-property="flexDirection">
+                <h3>Direction</h3>
+                <div class="button-group">
+                    <button class="active" data-value="row">Row</button>
+                    <button data-value="column">Column</button>
+                </div>
+            </div>
+
+            <div class="control-group" data-target="flex-container" data-property="justifyContent">
+                <h3>Justify Content</h3>
+                <div class="button-group">
+                    <button class="active" data-value="flex-start">Start</button>
+                    <button data-value="center">Center</button>
+                    <button data-value="space-between">Space Between</button>
+                </div>
             </div>
         </div>
+
     </div>
 
-    <!-- VISUAL PLAYGROUND -->
+
     <div class="playground-wrapper">
         <div class="playground" id="playground">
-            <div class="box box-1">1</div>
-            <div class="box box-2">2</div>
-            <div class="box box-3">3</div>
+
+
+            <header class="mock-header" id="mock-header">
+                <strong>Website Header</strong>
+            </header>
+
+
+            <div class="mock-body" id="mock-body">
+
+                <aside class="mock-sidebar" id="mock-sidebar">
+                    <div class="menu-item"></div>
+                    <div class="menu-item"></div>
+                    <div class="menu-item"></div>
+                </aside>
+
+                <main class="mock-content">
+                    <!-- Overlapping Flexbox Area -->
+                    <div class="flex-container" id="flex-container">
+                        <div class="box box-1" id="box-1">1</div>
+                        <div class="box box-2" id="box-2">2</div>
+                        <div class="box box-3" id="box-3">3</div>
+                    </div>
+
+                    <!-- Dummy text to force scrolling -->
+                    <div class="dummy-text">
+                        <h3>Keep scrolling down</h3>
+                        <p>Notice how the header disappears when it is <b>Static</b>, but stays permanently glued to the top when it is <b>Fixed</b>.</p>
+                        <br>
+                        <p>Also, observe what happens when you make the lateral menu <b>Absolute</b>. It is removed from the normal document flow, causing this text to slide underneath it!</p>
+                        <br><br><br><br><br><br><br>
+                        <p>More content down here...</p>
+                        <br><br><br><br><br><br><br>
+                        <p>Bottom of the page.</p>
+                    </div>
+                </main>
+
+            </div>
         </div>
     </div>
 </div>
 
 <script src="script.js"></script>
-
 </body>
 </html>
