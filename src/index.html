@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Layout Playground</title>
+
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Link to the external CSS file -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app-container">
+    <!-- CONTROLS PANEL -->
+    <div class="controls">
+        <div class="header">
+            <h1>CSS Layouts</h1>
+            <p>Click the properties below to see how items rearrange smoothly.</p>
+        </div>
+
+        <div class="control-group" data-property="flexDirection">
+            <h3>Direction</h3>
+            <div class="button-group">
+                <button class="active" data-value="row">Row (Left to Right)</button>
+                <button data-value="column">Column (Top to Down)</button>
+            </div>
+        </div>
+
+        <div class="control-group" data-property="justifyContent">
+            <h3>Justify Content (Main Axis)</h3>
+            <div class="button-group">
+                <button class="active" data-value="flex-start">Start</button>
+                <button data-value="center">Center</button>
+                <button data-value="flex-end">End</button>
+                <button data-value="space-between">Space Between</button>
+                <button data-value="space-around">Space Around</button>
+            </div>
+        </div>
+
+        <div class="control-group" data-property="alignItems">
+            <h3>Align Items (Cross Axis)</h3>
+            <div class="button-group">
+                <button class="active" data-value="stretch">Stretch</button>
+                <button data-value="flex-start">Start</button>
+                <button data-value="center">Center</button>
+                <button data-value="flex-end">End</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- VISUAL PLAYGROUND -->
+    <div class="playground-wrapper">
+        <div class="playground" id="playground">
+            <div class="box box-1">1</div>
+            <div class="box box-2">2</div>
+            <div class="box box-3">3</div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
