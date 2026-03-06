@@ -1,11 +1,12 @@
 const controlGroups = document.querySelectorAll('.control-group');
 
 controlGroups.forEach(group => {
-
-    const property = group.dataset.property;
     const targetId = group.dataset.target;
+    const property = group.dataset.property;
     const targetElement = document.getElementById(targetId);
     const buttons = group.querySelectorAll('button');
+
+    const isFlexAnimator = group.classList.contains('flex-animator');
 
     buttons.forEach(btn => {
         btn.addEventListener('click', () => {
@@ -16,8 +17,7 @@ controlGroups.forEach(group => {
 
             const newValue = btn.dataset.value;
 
-
-            if (!document.startViewTransition) {
+            if (!isFlexAnimator || !document.startViewTransition) {
                 targetElement.style[property] = newValue;
                 return;
             }

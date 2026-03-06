@@ -20,13 +20,13 @@ body {
     flex-direction: row;
     background: white;
     width: 100%;
-    max-width: 1100px;
-    height: 700px;
+    max-width: 1200px;
+    height: 85vh;
+    min-height: 600px;
     border-radius: 24px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
     overflow: hidden;
 }
-
 
 .controls {
     width: 380px;
@@ -39,7 +39,7 @@ body {
     overflow-y: auto;
 }
 
-.header h1 { font-size: 1.5rem; margin-bottom: 5px; }
+.header h1 { font-size: 1.5rem; margin-bottom: 5px; color: #111; }
 .header p { font-size: 0.85rem; color: #777; line-height: 1.4; }
 
 .control-section h2 {
@@ -47,25 +47,13 @@ body {
     color: #111;
     border-bottom: 2px solid #f0f0f0;
     padding-bottom: 8px;
-    margin-bottom: 15px;
+    margin-bottom: 12px;
 }
 
 .hint { font-size: 0.8rem; color: #888; margin-bottom: 10px; }
 
-.control-group {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin-bottom: 15px;
-}
-
-.control-group h3 {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: #999;
-}
-
+.control-group { margin-bottom: 15px; }
+.control-group h3 { font-size: 0.75rem; text-transform: uppercase; color: #999; margin-bottom: 8px; }
 .button-group { display: flex; flex-wrap: wrap; gap: 6px; }
 
 button {
@@ -88,65 +76,69 @@ button.active {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
-
 .playground-wrapper {
     flex: 1;
     background: #fafbfc;
     padding: 30px;
     display: flex;
-    flex-direction: column;
 }
 
-.playground {
+.browser-window {
     flex: 1;
     background: #ffffff;
     border: 2px solid #e5e7eb;
     border-radius: 12px;
-    overflow-y: auto;
     position: relative;
-
-
+    overflow: hidden;
     transform: translateZ(0);
 }
 
+.browser-scroll-area {
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: relative;
+}
 
+.header-spacer { height: 60px; width: 100%; }
 .mock-header {
     background: rgba(17, 24, 39, 0.95);
     backdrop-filter: blur(10px);
     color: white;
-    padding: 20px;
-    text-align: center;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-
-
-    top: 0;
-    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 60px;
     width: 100%;
-    z-index: 100;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    top: 0; left: 0; z-index: 100;
+    position: absolute;
 }
 
 .mock-body {
     display: flex;
     position: relative;
+    min-height: 800px;
 }
 
 .mock-sidebar {
     background: #f3f4f6;
-    width: 140px;
+    width: 130px;
     padding: 20px 10px;
     border-right: 1px solid #e5e7eb;
     display: flex;
     flex-direction: column;
     gap: 15px;
-    box-shadow: 4px 0 15px rgba(0,0,0,0.05);
-
-
-    top: 0;
-    left: 0;
-    height: 100%;
-    z-index: 50;
+    top: 0; left: 0; z-index: 50;
+    position: relative;
+    transition: box-shadow 0.3s ease;
 }
 
+.mock-sidebar[style*="absolute"] {
+    height: 100%;
+    box-shadow: 10px 0 20px rgba(0,0,0,0.08);
+    background: rgba(243, 244, 246, 0.95);
+}
 
 .menu-item { height: 8px; background: #d1d5db; border-radius: 4px; }
 
@@ -154,59 +146,65 @@ button.active {
     flex: 1;
     padding: 30px;
 }
+.mock-content h3 { font-size: 1rem; color: #555; margin-bottom: 10px; }
 
+.z-demo-container {
+    position: relative;
+    height: 140px;
+    background: #f9fafb;
+    border: 1px dashed #d1d5db;
+    border-radius: 12px;
+    margin-bottom: 30px;
+}
 
-.flex-container {
+.z-box {
+    position: absolute;
+    width: 90px; height: 90px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem; font-weight: bold; color: white;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, z-index 0s;
+}
+
+.z-pink { background: linear-gradient(135deg, #FF9A9E, #FECFEF); top: 15px; left: 20px; z-index: 1; }
+.z-blue { background: linear-gradient(135deg, #8FD3F4, #84FAB0); top: 35px; left: 70px; z-index: 2; }
+
+.z-pink[style*="z-index: 10"] { transform: scale(1.05); }
+
+.flex-demo-container {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-    align-items: center;
+    gap: 15px;
     background: #f9fafb;
-    border: 2px dashed #d1d5db;
+    border: 1px dashed #d1d5db;
     border-radius: 12px;
-    padding: 20px;
+    padding: 15px;
+    min-height: 140px;
     margin-bottom: 30px;
-    min-height: 160px;
 }
 
-
-.box {
-    min-width: 90px;
-    min-height: 90px;
-    border-radius: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: white;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-    position: relative;
-    border: 3px solid white; /
+.f-box {
+    width: 70px; height: 70px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem; font-weight: bold; color: white;
 }
 
-
-.box-1 { background: linear-gradient(135deg, #FF9A9E 0%, #FECFEF 100%); z-index: 1; }
-.box-2 { background: linear-gradient(135deg, #84FAB0 0%, #8FD3F4 100%); z-index: 2; margin-left: -40px; }
-.box-3 { background: linear-gradient(135deg, #A18CD1 0%, #FBC2EB 100%); z-index: 3; margin-left: -40px; }
-
-
-.mock-header { view-transition-name: header; }
-.mock-sidebar { view-transition-name: sidebar; }
-.box-1 { view-transition-name: box-1; }
-.box-2 { view-transition-name: box-2; }
-.box-3 { view-transition-name: box-3; }
+.f-1 { background: #3b82f6; view-transition-name: f1; }
+.f-2 { background: #8b5cf6; view-transition-name: f2; }
+.f-3 { background: #ec4899; view-transition-name: f3; }
 
 ::view-transition-group(*) {
-    animation-duration: 0.5s;
-    animation-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
+    animation-duration: 0.4s;
+    animation-timing-function: cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-
-.dummy-text { color: #555; line-height: 1.6; }
-
+.dummy-text { color: #666; line-height: 1.6; font-size: 0.9rem; }
 
 @media (max-width: 900px) {
     .app-container { flex-direction: column; height: 95vh; }
-    .controls { width: 100%; border-right: none; border-bottom: 2px solid #f0f0f0; max-height: 50%; }
+    .controls { width: 100%; border-right: none; border-bottom: 2px solid #f0f0f0; max-height: 45%; }
+    .playground-wrapper { padding: 15px; }
 }

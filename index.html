@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Advanced CSS Playground</title>
-
+    <title>CSS Interactive Playground</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -12,39 +11,36 @@
 
 <div class="app-container">
 
-
     <div class="controls">
         <div class="header">
-            <h1>CSS Playground</h1>
-            <p>Scroll the playground on the right to test fixed elements!</p>
+            <h1>CSS Mechanics</h1>
+            <p>Scroll the playground on the right to see how things react!</p>
         </div>
 
-
         <div class="control-section">
-            <h2>1. Positioning</h2>
+            <h2>1. Document Flow (Position)</h2>
 
             <div class="control-group" data-target="mock-header" data-property="position">
                 <h3>Header Behavior</h3>
                 <div class="button-group">
-                    <button class="active" data-value="static">Static (Scrolls away)</button>
+                    <button class="active" data-value="absolute">Absolute (Scrolls away)</button>
                     <button data-value="fixed">Fixed (Sticks to top)</button>
                 </div>
             </div>
 
             <div class="control-group" data-target="mock-sidebar" data-property="position">
-                <h3>Lateral Menu Behavior</h3>
+                <h3>Menu Behavior</h3>
                 <div class="button-group">
-                    <button class="active" data-value="static">Static (Takes up space)</button>
-                    <button data-value="absolute">Absolute (Floats over content)</button>
+                    <button class="active" data-value="relative">Relative (Takes space)</button>
+                    <button data-value="absolute">Absolute (Floats over)</button>
                 </div>
             </div>
         </div>
 
-
         <div class="control-section">
             <h2>2. Z-Index (Layering)</h2>
-            <p class="hint">Boxes overlap. Watch the Pink Box jump to the front.</p>
-            <div class="control-group" data-target="box-1" data-property="zIndex">
+            <p class="hint">Watch the Pink Box jump in front of the Blue Box.</p>
+            <div class="control-group" data-target="z-pink" data-property="zIndex">
                 <h3>Pink Box Z-Index</h3>
                 <div class="button-group">
                     <button class="active" data-value="1">z-index: 1 (Back)</button>
@@ -53,11 +49,10 @@
             </div>
         </div>
 
-
         <div class="control-section">
-            <h2>3. Flexbox (Content Area)</h2>
+            <h2>3. Flexbox (Rearranging)</h2>
 
-            <div class="control-group" data-target="flex-container" data-property="flexDirection">
+            <div class="control-group flex-animator" data-target="flex-container" data-property="flexDirection">
                 <h3>Direction</h3>
                 <div class="button-group">
                     <button class="active" data-value="row">Row</button>
@@ -65,7 +60,7 @@
                 </div>
             </div>
 
-            <div class="control-group" data-target="flex-container" data-property="justifyContent">
+            <div class="control-group flex-animator" data-target="flex-container" data-property="justifyContent">
                 <h3>Justify Content</h3>
                 <div class="button-group">
                     <button class="active" data-value="flex-start">Start</button>
@@ -77,45 +72,50 @@
 
     </div>
 
-
     <div class="playground-wrapper">
-        <div class="playground" id="playground">
+        <div class="browser-window">
 
+            <div class="browser-scroll-area">
 
-            <header class="mock-header" id="mock-header">
-                <strong>Website Header</strong>
-            </header>
+                <div class="header-spacer"></div>
+                <header class="mock-header" id="mock-header">
+                    <strong>Website Header</strong>
+                </header>
 
+                <div class="mock-body">
 
-            <div class="mock-body" id="mock-body">
+                    <aside class="mock-sidebar" id="mock-sidebar">
+                        <div class="menu-item"></div>
+                        <div class="menu-item"></div>
+                        <div class="menu-item"></div>
+                    </aside>
 
-                <aside class="mock-sidebar" id="mock-sidebar">
-                    <div class="menu-item"></div>
-                    <div class="menu-item"></div>
-                    <div class="menu-item"></div>
-                </aside>
+                    <main class="mock-content">
 
-                <main class="mock-content">
-                    <!-- Overlapping Flexbox Area -->
-                    <div class="flex-container" id="flex-container">
-                        <div class="box box-1" id="box-1">1</div>
-                        <div class="box box-2" id="box-2">2</div>
-                        <div class="box box-3" id="box-3">3</div>
-                    </div>
+                        <h3>Z-Index Demonstration</h3>
+                        <div class="z-demo-container">
+                            <div class="z-box z-pink" id="z-pink">Pink</div>
+                            <div class="z-box z-blue" id="z-blue">Blue</div>
+                        </div>
 
-                    <!-- Dummy text to force scrolling -->
-                    <div class="dummy-text">
-                        <h3>Keep scrolling down</h3>
-                        <p>Notice how the header disappears when it is <b>Static</b>, but stays permanently glued to the top when it is <b>Fixed</b>.</p>
-                        <br>
-                        <p>Also, observe what happens when you make the lateral menu <b>Absolute</b>. It is removed from the normal document flow, causing this text to slide underneath it!</p>
-                        <br><br><br><br><br><br><br>
-                        <p>More content down here...</p>
-                        <br><br><br><br><br><br><br>
-                        <p>Bottom of the page.</p>
-                    </div>
-                </main>
+                        <h3>Flexbox Demonstration</h3>
+                        <div class="flex-demo-container" id="flex-container">
+                            <div class="f-box f-1">1</div>
+                            <div class="f-box f-2">2</div>
+                            <div class="f-box f-3">3</div>
+                        </div>
 
+                        <div class="dummy-text">
+                            <h3>Keep scrolling down</h3>
+                            <p>If the Header is <b>Absolute</b>, it stays at the top of the document and disappears as you scroll. If you change it to <b>Fixed</b>, it breaks out of the scroll flow and sticks to the screen!</p>
+                            <br><br><br><br><br><br><br>
+                            <p>Notice that making the Menu <b>Absolute</b> removes it from the document flow, meaning this text slides underneath it.</p>
+                            <br><br><br><br><br><br><br>
+                            <p>End of page content.</p>
+                        </div>
+
+                    </main>
+                </div>
             </div>
         </div>
     </div>
