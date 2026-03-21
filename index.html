@@ -1,126 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CSS Interactive Playground</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PEDRO FORBECK</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 
-<div class="app-container">
+  <div id="cur"></div>
+  <div id="cur-ring"></div>
+  <canvas id="fog-canvas"></canvas>
 
-    <div class="controls">
-        <div class="header">
-            <h1>CSS Mechanics</h1>
-            <p>Scroll the playground on the right to see how things react!</p>
-        </div>
+  <div id="page">
+    <nav>
+      <a class="nav-mark" href="#">YN</a>
+      <div class="nav-right">
+        <a href="#about">About</a>
+        <a href="#work">Work</a>
+      </div>
+    </nav>
 
-        <div class="control-section">
-            <h2>1. Document Flow (Position)</h2>
+    <section id="hero">
+      <p class="label">Software Engineer</p>
+      <h1>Your<br><em>Name</em></h1>
+      <p class="sub">Building things that think</p>
+    </section>
 
-            <div class="control-group" data-target="mock-header" data-property="position">
-                <h3>Header Behavior</h3>
-                <div class="button-group">
-                    <button class="active" data-value="absolute">Absolute (Scrolls away)</button>
-                    <button data-value="fixed">Fixed (Sticks to top)</button>
-                </div>
-            </div>
-
-            <div class="control-group" data-target="mock-sidebar" data-property="position">
-                <h3>Menu Behavior</h3>
-                <div class="button-group">
-                    <button class="active" data-value="relative">Relative (Takes space)</button>
-                    <button data-value="absolute">Absolute (Floats over)</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="control-section">
-            <h2>2. Z-Index (Layering)</h2>
-            <p class="hint">Watch the Pink Box jump in front of the Blue Box.</p>
-            <div class="control-group" data-target="z-pink" data-property="zIndex">
-                <h3>Pink Box Z-Index</h3>
-                <div class="button-group">
-                    <button class="active" data-value="1">z-index: 1 (Back)</button>
-                    <button data-value="10">z-index: 10 (Front)</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="control-section">
-            <h2>3. Flexbox (Rearranging)</h2>
-
-            <div class="control-group flex-animator" data-target="flex-container" data-property="flexDirection">
-                <h3>Direction</h3>
-                <div class="button-group">
-                    <button class="active" data-value="row">Row</button>
-                    <button data-value="column">Column</button>
-                </div>
-            </div>
-
-            <div class="control-group flex-animator" data-target="flex-container" data-property="justifyContent">
-                <h3>Justify Content</h3>
-                <div class="button-group">
-                    <button class="active" data-value="flex-start">Start</button>
-                    <button data-value="center">Center</button>
-                    <button data-value="space-between">Space Between</button>
-                </div>
-            </div>
-        </div>
-
+    <div class="socials">
+      <a class="social-link" href="https://github.com/" target="_blank" aria-label="GitHub">
+        <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+      </a>
+      <a class="social-link" href="https://linkedin.com/" target="_blank" aria-label="LinkedIn">
+        <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+      </a>
+      <a class="social-link" href="mailto:you@email.com" aria-label="Email">
+        <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      </a>
     </div>
 
-    <div class="playground-wrapper">
-        <div class="browser-window">
+    <section id="about">
+      <div class="about-inner">
+        <p class="label">About</p>
+        <p class="about-body">
+          A developer obsessed with the intersection<br>
+          of <em>logic</em> and <em>craft</em> — writing software<br>
+          that is precise, purposeful,<br>
+          and occasionally unreasonably beautiful.
+        </p>
+      </div>
+    </section>
 
-            <div class="browser-scroll-area">
+    <section id="work">
+      <p class="label">Projects</p>
+      <div class="work-list">
+        <a class="work-item" href="https://github.com/pedroforbeck/bff-agendador-tarefas" target="_blank">
+          <span class="work-name">BFF Agendador de Tarefas</span>
+          <span class="work-tag">Java · GitHub</span>
+        </a>
+        <a class="work-item" href="https://github.com/pedroforbeck/sentinel" target="_blank">
+          <span class="work-name">Sentinel</span>
+          <span class="work-tag">Java · GitHub</span>
+        </a>
+      </div>
+    </section>
 
-                <div class="header-spacer"></div>
-                <header class="mock-header" id="mock-header">
-                    <strong>Website Header</strong>
-                </header>
+    <footer>
+      <span>PEDRO FORBECK</span>
+      <span>2026</span>
+    </footer>
+  </div>
 
-                <div class="mock-body">
-
-                    <aside class="mock-sidebar" id="mock-sidebar">
-                        <div class="menu-item"></div>
-                        <div class="menu-item"></div>
-                        <div class="menu-item"></div>
-                    </aside>
-
-                    <main class="mock-content">
-
-                        <h3>Z-Index Demonstration</h3>
-                        <div class="z-demo-container">
-                            <div class="z-box z-pink" id="z-pink">Pink</div>
-                            <div class="z-box z-blue" id="z-blue">Blue</div>
-                        </div>
-
-                        <h3>Flexbox Demonstration</h3>
-                        <div class="flex-demo-container" id="flex-container">
-                            <div class="f-box f-1">1</div>
-                            <div class="f-box f-2">2</div>
-                            <div class="f-box f-3">3</div>
-                        </div>
-
-                        <div class="dummy-text">
-                            <h3>Keep scrolling down</h3>
-                            <p>If the Header is <b>Absolute</b>, it stays at the top of the document and disappears as you scroll. If you change it to <b>Fixed</b>, it breaks out of the scroll flow and sticks to the screen!</p>
-                            <br><br><br><br><br><br><br>
-                            <p>Notice that making the Menu <b>Absolute</b> removes it from the document flow, meaning this text slides underneath it.</p>
-                            <br><br><br><br><br><br><br>
-                            <p>End of page content.</p>
-                        </div>
-
-                    </main>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
