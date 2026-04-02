@@ -435,9 +435,9 @@ class CanvAscii {
 
   updateRotation() {
     const x = Math.map(this.mouse.y, 0, this.height, 0.3, -0.3);
+    const y = Math.map(this.mouse.x, 0, this.width, -0.3, 0.3);
     this.mesh.rotation.x += (x - this.mesh.rotation.x) * 0.05;
-    // Y rotation locked â€” no side-to-side tilt
-    this.mesh.rotation.y += (0 - this.mesh.rotation.y) * 0.05;
+    this.mesh.rotation.y += (y - this.mesh.rotation.y) * 0.05;
   }
 
   dispose() {
@@ -508,20 +508,23 @@ async function initAsciiInstance(containerId, config) {
   return instance;
 }
 
+const isMobile = window.innerWidth <= 768;
+const responsiveAsciiSize = isMobile ? 1 : 7;
+
 // Hero: "Pedro\nForbeck" on two lines â€” massive, with waves
 initAsciiInstance('ascii-hero', {
   text: 'Pedro\nForbeck',
-  asciiFontSize: 10,
+  asciiFontSize: responsiveAsciiSize,
   textFontSize: 280,
   textColor: '#fdf9f3',
   planeBaseHeight: 18,
-  enableWaves: true
+  enableWaves: false
 });
 
 // Projects heading: "PROJECTS" â€” large and readable, no waves
 initAsciiInstance('ascii-projects', {
   text: 'PROJECTS',
-  asciiFontSize: 12,
+  asciiFontSize: responsiveAsciiSize,
   textFontSize: 240,
   textColor: '#fdf9f3',
   planeBaseHeight: 10,
@@ -562,8 +565,23 @@ const workObserver = new IntersectionObserver(entries => {
 
 workItems.forEach((item, i) => {
   item.style.transitionDelay = `${i * 0.15}s`;
+  // Opposite speeds: one scrolls up, the other scrolls down
+  item.dataset.speed = i % 2 === 0 ? -0.15 : 0.15;
   workObserver.observe(item);
 });
+
+// Parallax for work items
+window.addEventListener('scroll', () => {
+  const vh = window.innerHeight;
+  workItems.forEach(item => {
+    const speed = parseFloat(item.dataset.speed);
+    const rect = item.parentElement.getBoundingClientRect();
+    // Distance from the center of the viewport
+    // When the container's center matches the viewport center, distance is 0 and they perfectly align
+    const distance = (rect.top + rect.height / 2) - vh / 2;
+    item.style.transform = `translateY(${distance * speed}px)`;
+  });
+}, { passive: true });
 
 // Dividers
 const dividerObserver = new IntersectionObserver(entries => {
@@ -589,19 +607,19 @@ const themeToggle = document.getElementById('theme-toggle');
 // Check for saved user preference, if any, on load of the website
 const currentTheme = localStorage.getItem('theme') ? localStorage.getItem('theme') : null;
 if (currentTheme) {
-    document.documentElement.setAttribute('data-theme', currentTheme);
+  document.documentElement.setAttribute('data-theme', currentTheme);
 }
 
 themeToggle.addEventListener('click', () => {
-    let theme = document.documentElement.getAttribute('data-theme');
-    
-    if (theme === 'light') {
-        document.documentElement.setAttribute('data-theme', 'dark');
-        localStorage.setItem('theme', 'dark');
-    } else {
-        document.documentElement.setAttribute('data-theme', 'light');
-        localStorage.setItem('theme', 'light');
-    }
+  let theme = document.documentElement.getAttribute('data-theme');
+
+  if (theme === 'light') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    localStorage.setItem('theme', 'dark');
+  } else {
+    document.documentElement.setAttribute('data-theme', 'light');
+    localStorage.setItem('theme', 'light');
+  }
 });
 
 // Also add magnetic behaviour for the theme button since it was not caught by the original querySelectorAll
