@@ -10,6 +10,51 @@
   --faint: rgba(255, 255, 255, 0.28);
   --dimmer: rgba(255, 255, 255, 0.10);
   --scroll: 0;
+
+  --bg-color: #000;
+  --text-color: #fff;
+  --nav-hover: #fff;
+  --progress-bg: rgba(255, 255, 255, 0.08);
+  --progress-fill: rgba(255, 255, 255, 0.6);
+  --divider-grad: rgba(255, 255, 255, 0.12);
+  --social-text: rgba(255, 255, 255, 0.22);
+  --social-hover: #fff;
+  --line-wipe: rgba(255, 255, 255, 0.3);
+  --about-body: rgba(255, 255, 255, 0.65);
+  --about-em: #fff;
+  --card-border: rgba(255, 255, 255, 0.06);
+  --card-bg: rgba(255, 255, 255, 0.02);
+  --card-glow: rgba(255, 255, 255, 0.12);
+  --card-spotlight: rgba(255, 255, 255, 0.06);
+  --work-name: rgba(255, 255, 255, 0.35);
+  --work-name-hover: rgba(255, 255, 255, 0.85);
+  --work-desc: rgba(255, 255, 255, 0.15);
+  --work-desc-hover: rgba(255, 255, 255, 0.35);
+}
+
+[data-theme='light'] {
+  --faint: rgba(0, 0, 0, 0.45);
+  --dimmer: rgba(0, 0, 0, 0.20);
+  
+  --bg-color: #fff;
+  --text-color: #000;
+  --nav-hover: #000;
+  --progress-bg: rgba(0, 0, 0, 0.1);
+  --progress-fill: rgba(0, 0, 0, 0.6);
+  --divider-grad: rgba(0, 0, 0, 0.15);
+  --social-text: rgba(0, 0, 0, 0.35);
+  --social-hover: #000;
+  --line-wipe: rgba(0, 0, 0, 0.2);
+  --about-body: rgba(0, 0, 0, 0.7);
+  --about-em: #000;
+  --card-border: rgba(0, 0, 0, 0.1);
+  --card-bg: rgba(0, 0, 0, 0.03);
+  --card-glow: rgba(0, 0, 0, 0.15);
+  --card-spotlight: rgba(0, 0, 0, 0.06);
+  --work-name: rgba(0, 0, 0, 0.45);
+  --work-name-hover: rgba(0, 0, 0, 0.85);
+  --work-desc: rgba(0, 0, 0, 0.3);
+  --work-desc-hover: rgba(0, 0, 0, 0.6);
 }
 
 ::-webkit-scrollbar {
@@ -18,15 +63,19 @@
 
 html {
   scrollbar-width: none;
-  background: #000;
+  background: var(--bg-color);
   scroll-behavior: smooth;
 }
 
 body {
-  background: #000;
-  color: #fff;
+  background: var(--bg-color);
+  color: var(--text-color);
   font-family: 'DM Mono', monospace;
   overflow-x: hidden;
+  cursor: auto;
+}
+
+a, button, .card-spotlight, .social-link, .magnetic {
   cursor: none;
 }
 
@@ -37,7 +86,7 @@ body {
   left: 0;
   width: 100%;
   height: 2px;
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--progress-bg);
   z-index: 10000;
   pointer-events: none;
 }
@@ -47,7 +96,7 @@ body {
   display: block;
   height: 100%;
   width: 100%;
-  background: rgba(255, 255, 255, 0.6);
+  background: var(--progress-fill);
   transform: scaleX(var(--scroll));
   transform-origin: left;
   transition: transform .08s linear;
@@ -56,56 +105,24 @@ body {
 /* ── Cursor ── */
 #cur {
   position: fixed;
-  width: 12px;
-  height: 12px;
+  width: 32px;
+  height: 32px;
   background: #fff;
   border-radius: 50%;
   pointer-events: none;
   transform: translate(-50%, -50%);
   z-index: 9999;
   mix-blend-mode: difference;
+  opacity: 0;
   transition: width .4s cubic-bezier(.23, 1, .32, 1),
-    height .4s cubic-bezier(.23, 1, .32, 1);
+    height .4s cubic-bezier(.23, 1, .32, 1),
+    opacity .3s ease;
 }
 
 #cur.hover-active {
-  width: 60px;
-  height: 60px;
-}
-
-#cur-ring {
-  position: fixed;
-  width: 36px;
-  height: 36px;
-  border: 1px solid rgba(255, 255, 255, .18);
-  border-radius: 50%;
-  pointer-events: none;
-  transform: translate(-50%, -50%);
-  z-index: 9998;
-  mix-blend-mode: difference;
-  transition: width .35s cubic-bezier(.23, 1, .32, 1),
-    height .35s cubic-bezier(.23, 1, .32, 1),
-    border-color .3s,
-    opacity .3s;
-}
-
-#cur-ring.hover-active {
-  width: 64px;
-  height: 64px;
-  border-color: transparent;
-  opacity: 0;
-}
-
-/* ── Canvas ── */
-#fog-canvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  pointer-events: none;
-  opacity: 0.12;
+  width: 80px;
+  height: 80px;
+  opacity: 1;
 }
 
 /* ── Page ── */
@@ -137,7 +154,7 @@ nav {
 }
 
 .nav-mark:hover {
-  color: #fff;
+  color: var(--nav-hover);
 }
 
 .nav-right {
@@ -157,7 +174,7 @@ nav {
 }
 
 .nav-right a:hover {
-  color: #fff;
+  color: var(--nav-hover);
 }
 
 /* ── Hero ── */
@@ -281,7 +298,7 @@ nav {
   width: 1px;
   height: 120px;
   margin: 0 auto;
-  background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.12), transparent);
+  background: linear-gradient(to bottom, transparent, var(--divider-grad), transparent);
   opacity: 0;
   transform: scaleY(0);
   transition: opacity 1s ease, transform 1.2s cubic-bezier(.16, 1, .3, 1);
@@ -305,13 +322,13 @@ nav {
 }
 
 .social-link {
-  color: rgba(255, 255, 255, .22);
+  color: var(--social-text);
   display: flex;
   transition: color .25s, transform .35s cubic-bezier(.23, 1, .32, 1);
 }
 
 .social-link:hover {
-  color: #fff;
+  color: var(--social-hover);
   transform: translateY(-3px);
 }
 
@@ -343,7 +360,7 @@ nav {
 .line-wipe {
   width: 60px;
   height: 1px;
-  background: rgba(255, 255, 255, 0.3);
+  background: var(--line-wipe);
   margin: 0 auto 3rem;
   transform: scaleX(0);
   transition: transform 1.2s cubic-bezier(.16, 1, .3, 1);
@@ -370,12 +387,12 @@ nav {
   font-size: clamp(1.4rem, 2.8vw, 1.9rem);
   font-weight: 200;
   line-height: 1.6;
-  color: rgba(255, 255, 255, .65);
+  color: var(--about-body);
 }
 
 .about-body em {
   font-style: italic;
-  color: #fff;
+  color: var(--about-em);
 }
 
 .about-body .char-wrap {
@@ -392,7 +409,7 @@ nav {
 
 .about-body .char-wrap em {
   font-style: italic;
-  color: #fff;
+  color: var(--about-em);
 }
 
 /* ═══════════════════════════════
@@ -415,8 +432,8 @@ nav {
 .card-spotlight {
   position: relative;
   border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--card-border);
+  background: var(--card-bg);
   overflow: hidden;
   cursor: none;
 }
@@ -431,7 +448,7 @@ nav {
   border-radius: inherit;
   background: radial-gradient(
     600px circle at var(--mouse-x, -300px) var(--mouse-y, -300px),
-    var(--spotlight-color, rgba(255, 255, 255, 0.06)),
+    var(--spotlight-color, var(--card-spotlight)),
     transparent 40%
   );
   opacity: 0;
@@ -455,7 +472,7 @@ nav {
   border-radius: inherit;
   background: radial-gradient(
     400px circle at var(--mouse-x, -300px) var(--mouse-y, -300px),
-    rgba(255, 255, 255, 0.12),
+    var(--card-glow),
     transparent 40%
   );
   opacity: 0;
@@ -498,24 +515,24 @@ nav {
   font-family: 'Cormorant Garamond', serif;
   font-weight: 200;
   font-size: clamp(1.6rem, 3.5vw, 2.4rem);
-  color: rgba(255, 255, 255, .35);
+  color: var(--work-name);
   transition: color .3s, letter-spacing .4s cubic-bezier(.23, 1, .32, 1);
 }
 
 .work-item:hover .work-name {
-  color: rgba(255, 255, 255, .85);
+  color: var(--work-name-hover);
   letter-spacing: .03em;
 }
 
 .work-desc {
   font-size: .7rem;
   letter-spacing: .08em;
-  color: rgba(255, 255, 255, .15);
+  color: var(--work-desc);
   transition: color .3s;
 }
 
 .work-item:hover .work-desc {
-  color: rgba(255, 255, 255, .35);
+  color: var(--work-desc-hover);
 }
 
 .work-tag {
