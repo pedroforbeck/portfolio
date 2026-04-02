@@ -211,7 +211,7 @@ nav {
 ═══════════════════════════════ */
 #ascii-hero {
   position: relative;
-  width: clamp(560px, 95vw, 1400px);
+  width: clamp(280px, 95vw, 1400px);
   height: clamp(300px, 55vw, 700px);
   overflow: visible;
 }
@@ -219,7 +219,7 @@ nav {
 /* Smaller ASCII for the PROJECTS heading */
 #ascii-projects {
   position: relative;
-  width: clamp(450px, 80vw, 1000px);
+  width: clamp(280px, 80vw, 1000px);
   height: clamp(100px, 20vw, 260px);
   margin: 0 auto 4rem;
   overflow: visible;
@@ -576,4 +576,36 @@ footer span {
 /* ── Magnetic element base ── */
 .magnetic {
   transition: transform .35s cubic-bezier(.23, 1, .32, 1);
+}
+
+/* ── Mobile Responsiveness ── */
+@media (max-width: 768px) {
+  nav {
+    padding: 1.2rem 1.5rem;
+  }
+  
+  #about {
+    padding: 5rem 1.5rem;
+  }
+  
+  #work {
+    padding: 4rem 1.5rem 8rem;
+  }
+  
+  .work-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.2rem;
+    padding: 1.5rem;
+  }
+  
+  footer {
+    padding: 1.5rem;
+  }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  #cur {
+    display: none !important;
+  }
 }
