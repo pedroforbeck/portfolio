@@ -18,10 +18,6 @@
 
   <!-- Custom cursor -->
   <div id="cur"></div>
-  <div id="cur-ring"></div>
-
-  <!-- WebGL fog background -->
-  <canvas id="fog-canvas"></canvas>
 
   <div id="page">
     <nav>
@@ -29,6 +25,7 @@
       <div class="nav-right">
         <a href="#about">About</a>
         <a href="#work">Work</a>
+        <a id="theme-toggle" style="cursor: pointer;" aria-label="Toggle Theme">Theme</a>
       </div>
     </nav>
 
@@ -73,14 +70,14 @@
       <div id="ascii-projects"></div>
 
       <div class="work-list">
-        <a class="card-spotlight work-item magnetic" href="https://github.com/pedroforbeck/bff-agendador-tarefas" target="_blank">
+        <a class="card-spotlight work-item" href="https://github.com/pedroforbeck/bff-agendador-tarefas" target="_blank">
           <div class="work-card-content">
             <span class="work-name">Task Scheduler</span>
             <p class="work-desc">Backend-for-frontend task scheduling service</p>
           </div>
           <span class="work-tag">Java · GitHub</span>
         </a>
-        <a class="card-spotlight work-item magnetic" href="https://github.com/pedroforbeck/sentinel" target="_blank">
+        <a class="card-spotlight work-item" href="https://github.com/pedroforbeck/sentinel" target="_blank">
           <div class="work-card-content">
             <span class="work-name">Sentinel</span>
             <p class="work-desc">Monitoring & alerting system</p>
