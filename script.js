@@ -480,9 +480,13 @@ const isMobile = viewportWidth <= 768;
 const responsiveAsciiSize = isSmallMobile ? 2 : (isMobile ? 3 : 7);
 const heroTextFontSize = isSmallMobile ? 170 : 280;
 const heroPlaneBaseHeight = isSmallMobile ? 13 : 18;
+const asciiHeroEl = document.getElementById('ascii-hero');
+const heroMobileNameEl = document.getElementById('hero-mobile-name');
 
 // Hero: "Pedro\nForbeck" on two lines â€” massive, with waves
 if (!isSmallMobile) {
+  if (heroMobileNameEl) heroMobileNameEl.hidden = true;
+  if (asciiHeroEl) asciiHeroEl.style.display = '';
   initAsciiInstance('ascii-hero', {
     text: 'Pedro\nForbeck',
     asciiFontSize: responsiveAsciiSize,
@@ -491,6 +495,9 @@ if (!isSmallMobile) {
     planeBaseHeight: heroPlaneBaseHeight,
     enableWaves: false
   });
+} else {
+  if (asciiHeroEl) asciiHeroEl.style.display = 'none';
+  if (heroMobileNameEl) heroMobileNameEl.hidden = false;
 }
 
 /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
