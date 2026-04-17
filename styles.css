@@ -75,10 +75,6 @@ body {
   cursor: auto;
 }
 
-a, button, .card-spotlight, .social-link, .magnetic {
-  cursor: none;
-}
-
 /* ── Scroll Progress ── */
 #scroll-progress {
   position: fixed;
@@ -100,29 +96,6 @@ a, button, .card-spotlight, .social-link, .magnetic {
   transform: scaleX(var(--scroll));
   transform-origin: left;
   transition: transform .08s linear;
-}
-
-/* ── Cursor ── */
-#cur {
-  position: fixed;
-  width: 32px;
-  height: 32px;
-  background: #fff;
-  border-radius: 50%;
-  pointer-events: none;
-  transform: translate(-50%, -50%);
-  z-index: 9999;
-  mix-blend-mode: difference;
-  opacity: 0;
-  transition: width .4s cubic-bezier(.23, 1, .32, 1),
-    height .4s cubic-bezier(.23, 1, .32, 1),
-    opacity .3s ease;
-}
-
-#cur.hover-active {
-  width: 80px;
-  height: 80px;
-  opacity: 1;
 }
 
 /* ── Page ── */
@@ -223,15 +196,6 @@ nav {
   position: relative;
   width: clamp(280px, 95vw, 1400px);
   height: clamp(300px, 55vw, 700px);
-  overflow: visible;
-}
-
-/* Smaller ASCII for the PROJECTS heading */
-#ascii-projects {
-  position: relative;
-  width: clamp(280px, 80vw, 1000px);
-  height: clamp(100px, 20vw, 260px);
-  margin: 0 auto 4rem;
   overflow: visible;
 }
 
@@ -430,6 +394,77 @@ nav {
   padding: 8rem 2.8rem 30rem;
 }
 
+.section-title {
+  width: 100%;
+  text-align: center;
+  margin: 0 auto 4rem;
+  letter-spacing: .16em;
+  font-size: clamp(2rem, 8vw, 5rem);
+}
+
+.shiny-text {
+  display: inline-block;
+  color: var(--faint);
+}
+
+[data-theme='light'] .shiny-text {
+  color: rgba(0, 0, 0, 0.35);
+}
+
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .shiny-text {
+    background: linear-gradient(
+      120deg,
+      rgba(255, 255, 255, 0.34) 0%,
+      rgba(255, 255, 255, 0.34) 42%,
+      rgba(255, 255, 255, 1) 50%,
+      rgba(255, 255, 255, 0.34) 58%,
+      rgba(255, 255, 255, 0.34) 100%
+    );
+    background-size: 220% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    animation: shinyMove 5s linear infinite;
+  }
+
+  [data-theme='light'] .shiny-text {
+    background: linear-gradient(
+      120deg,
+      rgba(0, 0, 0, 0.36) 0%,
+      rgba(0, 0, 0, 0.36) 42%,
+      rgba(0, 0, 0, 0.95) 50%,
+      rgba(0, 0, 0, 0.36) 58%,
+      rgba(0, 0, 0, 0.36) 100%
+    );
+    background-size: 220% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+}
+
+@keyframes shinyMove {
+  from { background-position: 100% 0; }
+  to { background-position: -100% 0; }
+}
+
+.opensource-list {
+  max-width: 800px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2.5rem;
+}
+
+#opensource {
+  min-height: 90vh;
+  padding: 0 2.8rem 20rem;
+}
+
+
 .work-list {
   max-width: 800px;
   margin: 0 auto;
@@ -438,73 +473,24 @@ nav {
   gap: 2.5rem;
 }
 
-/* SpotlightCard */
-.card-spotlight {
+/* ProfileCard style used for projects/opensource */
+.profile-card {
   position: relative;
   border-radius: 20px;
   border: 1px solid var(--card-border);
   background: var(--card-bg);
   overflow: hidden;
-  cursor: none;
-  /* Making it a perfect square */
-  aspect-ratio: 1 / 1;
-}
-
-.card-spotlight::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border-radius: inherit;
-  background: radial-gradient(
-    600px circle at var(--mouse-x, -300px) var(--mouse-y, -300px),
-    var(--spotlight-color, var(--card-spotlight)),
-    transparent 40%
-  );
-  opacity: 0;
-  transition: opacity .35s ease;
-  pointer-events: none;
-  z-index: 1;
-}
-
-.card-spotlight:hover::before {
-  opacity: 1;
-}
-
-/* Border glow on hover */
-.card-spotlight::after {
-  content: '';
-  position: absolute;
-  top: -1px;
-  left: -1px;
-  right: -1px;
-  bottom: -1px;
-  border-radius: inherit;
-  background: radial-gradient(
-    400px circle at var(--mouse-x, -300px) var(--mouse-y, -300px),
-    var(--card-glow),
-    transparent 40%
-  );
-  opacity: 0;
-  transition: opacity .35s ease;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.card-spotlight:hover::after {
-  opacity: 1;
+  min-height: 280px;
 }
 
 /* Work item as card */
 .work-item {
-  padding: 2.5rem;
+  padding: 2rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+  justify-content: flex-start;
+  align-items: stretch;
+  text-align: left;
   opacity: 0;
   transition: opacity .8s ease;
   text-decoration: none;
@@ -518,10 +504,28 @@ nav {
   opacity: 1;
 }
 
-.work-card-content {
+.profile-card-head {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.profile-card-avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  border: 1px solid var(--card-border);
+  display: grid;
+  place-items: center;
+  font-size: .78rem;
+  letter-spacing: .14em;
+  color: var(--faint);
+}
+
+.profile-card-meta {
   display: flex;
   flex-direction: column;
-  gap: .8rem;
+  gap: .35rem;
   position: relative;
   z-index: 3;
 }
@@ -529,7 +533,7 @@ nav {
 .work-name {
   font-family: 'Cormorant Garamond', serif;
   font-weight: 200;
-  font-size: clamp(2rem, 4vw, 3rem);
+  font-size: clamp(1.5rem, 3vw, 2.1rem);
   color: var(--work-name);
   transition: color .3s, letter-spacing .4s cubic-bezier(.23, 1, .32, 1);
 }
@@ -540,11 +544,11 @@ nav {
 }
 
 .work-desc {
-  font-size: .75rem;
-  letter-spacing: .08em;
+  font-size: .72rem;
+  letter-spacing: .06em;
   color: var(--work-desc);
   transition: color .3s;
-  line-height: 1.4;
+  line-height: 1.6;
 }
 
 .work-item:hover .work-desc {
@@ -553,13 +557,12 @@ nav {
 
 .work-tag {
   font-size: .55rem;
-  letter-spacing: .2em;
+  letter-spacing: .16em;
   text-transform: uppercase;
   color: var(--dimmer);
   transition: color .3s;
   position: relative;
   z-index: 3;
-  margin-top: auto; /* Push down to bottom */
 }
 
 .work-item:hover .work-tag {
@@ -607,21 +610,23 @@ footer span {
   #work {
     padding: 4rem 1.5rem 8rem;
   }
-  
+
+  #opensource {
+    padding: 0 1.5rem 8rem;
+  }
+
   .work-item {
-    flex-direction: column;
-    align-items: flex-start;
     gap: 1.2rem;
     padding: 1.5rem;
+  }
+
+  .work-name {
+    font-size: clamp(1rem, 3vw, 1.8rem);
+    word-break: break-word;
+    hyphens: auto;
   }
   
   footer {
     padding: 1.5rem;
-  }
-}
-
-@media (hover: none) and (pointer: coarse) {
-  #cur {
-    display: none !important;
   }
 }

@@ -1,17 +1,4 @@
 /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   Cursor â€” dot with magnetic hover
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
-const cur = document.getElementById('cur');
-let mx = -300, my = -300;
-
-document.addEventListener('mousemove', e => {
-  mx = e.clientX; my = e.clientY;
-  cur.style.left = mx + 'px';
-  cur.style.top = my + 'px';
-});
-
-
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    Magnetic cursor for interactive elements
 â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 const magneticEls = document.querySelectorAll('.magnetic');
@@ -22,40 +9,9 @@ magneticEls.forEach(el => {
     const x = e.clientX - rect.left - rect.width / 2;
     const y = e.clientY - rect.top - rect.height / 2;
     el.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px)`;
-    cur.classList.add('hover-active');
   });
   el.addEventListener('mouseleave', () => {
     el.style.transform = '';
-    cur.classList.remove('hover-active');
-  });
-});
-
-// Sticky invert ball on ALL interactive elements (a, button, nav links, cards)
-document.addEventListener('mouseover', e => {
-  const target = e.target.closest('a, button, .card-spotlight, nav a, .social-link');
-  if (target) {
-    cur.classList.add('hover-active');
-  }
-});
-document.addEventListener('mouseout', e => {
-  const target = e.target.closest('a, button, .card-spotlight, nav a, .social-link');
-  if (target) {
-    cur.classList.remove('hover-active');
-  }
-});
-
-
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   SpotlightCard â€” mouse-following light
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
-document.querySelectorAll('.card-spotlight').forEach(card => {
-  card.addEventListener('mousemove', e => {
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    card.style.setProperty('--mouse-x', `${x}px`);
-    card.style.setProperty('--mouse-y', `${y}px`);
-    card.style.setProperty('--spotlight-color', 'rgba(255, 255, 255, 0.06)');
   });
 });
 
@@ -333,6 +289,7 @@ class CanvAscii {
     this.scene = new THREE.Scene();
     this.mouse = { x: this.width / 2, y: this.height / 2 };
     this.onMouseMove = this.onMouseMove.bind(this);
+    this.onClick = this.onClick.bind(this);
   }
 
   async init() {
@@ -395,6 +352,7 @@ class CanvAscii {
 
     this.container.addEventListener('mousemove', this.onMouseMove);
     this.container.addEventListener('touchmove', this.onMouseMove);
+    this.container.addEventListener('click', this.onClick);
   }
 
   setSize(w, h) {
@@ -414,6 +372,13 @@ class CanvAscii {
     const x = e.clientX - bounds.left;
     const y = e.clientY - bounds.top;
     this.mouse = { x, y };
+  }
+
+  onClick() {
+    this.enableWaves = !this.enableWaves;
+    if (this.mesh && this.mesh.material) {
+      this.mesh.material.uniforms.uEnableWaves.value = this.enableWaves ? 1.0 : 0.0;
+    }
   }
 
   animate() {
@@ -450,6 +415,7 @@ class CanvAscii {
     }
     this.container.removeEventListener('mousemove', this.onMouseMove);
     this.container.removeEventListener('touchmove', this.onMouseMove);
+    this.container.removeEventListener('click', this.onClick);
     this.scene.traverse(obj => {
       if (obj.isMesh && obj.material) {
         Object.keys(obj.material).forEach(key => {
@@ -509,7 +475,7 @@ async function initAsciiInstance(containerId, config) {
 }
 
 const isMobile = window.innerWidth <= 768;
-const responsiveAsciiSize = isMobile ? 1 : 7;
+const responsiveAsciiSize = isMobile ? 3 : 7;
 
 // Hero: "Pedro\nForbeck" on two lines â€” massive, with waves
 initAsciiInstance('ascii-hero', {
@@ -520,17 +486,6 @@ initAsciiInstance('ascii-hero', {
   planeBaseHeight: 18,
   enableWaves: false
 });
-
-// Projects heading: "PROJECTS" â€” large and readable, no waves
-initAsciiInstance('ascii-projects', {
-  text: 'PROJECTS',
-  asciiFontSize: responsiveAsciiSize,
-  textFontSize: 240,
-  textColor: '#fdf9f3',
-  planeBaseHeight: 10,
-  enableWaves: false
-});
-
 
 /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    Enhanced scroll reveal (IntersectionObserver)
@@ -565,23 +520,8 @@ const workObserver = new IntersectionObserver(entries => {
 
 workItems.forEach((item, i) => {
   item.style.transitionDelay = `${i * 0.15}s`;
-  // Opposite speeds: one scrolls up, the other scrolls down
-  item.dataset.speed = i % 2 === 0 ? -0.15 : 0.15;
   workObserver.observe(item);
 });
-
-// Parallax for work items
-window.addEventListener('scroll', () => {
-  const vh = window.innerHeight;
-  workItems.forEach(item => {
-    const speed = parseFloat(item.dataset.speed);
-    const rect = item.parentElement.getBoundingClientRect();
-    // Distance from the center of the viewport
-    // When the container's center matches the viewport center, distance is 0 and they perfectly align
-    const distance = (rect.top + rect.height / 2) - vh / 2;
-    item.style.transform = `translateY(${distance * speed}px)`;
-  });
-}, { passive: true });
 
 // Dividers
 const dividerObserver = new IntersectionObserver(entries => {
@@ -628,9 +568,7 @@ themeToggle.addEventListener('mousemove', e => {
   const x = e.clientX - rect.left - rect.width / 2;
   const y = e.clientY - rect.top - rect.height / 2;
   themeToggle.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px)`;
-  if (typeof cur !== 'undefined' && cur) cur.classList.add('hover-active');
 });
 themeToggle.addEventListener('mouseleave', () => {
   themeToggle.style.transform = '';
-  if (typeof cur !== 'undefined' && cur) cur.classList.remove('hover-active');
 });

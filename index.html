@@ -16,9 +16,6 @@
   <!-- Scroll progress bar -->
   <div id="scroll-progress"></div>
 
-  <!-- Custom cursor -->
-  <div id="cur"></div>
-
   <div id="page">
     <nav>
       <a class="nav-mark" href="#">PF</a>
@@ -67,23 +64,59 @@
     <div class="section-divider"></div>
 
     <section id="work">
-      <!-- ASCII "PROJECTS" header -->
-      <div id="ascii-projects"></div>
+      <h2 class="shiny-text section-title">PROJECTS</h2>
 
       <div class="work-list">
-        <a class="card-spotlight work-item" href="https://github.com/pedroforbeck/bff-agendador-tarefas" target="_blank">
-          <div class="work-card-content">
-            <span class="work-name">Task Scheduler</span>
-            <p class="work-desc">Backend-for-frontend task scheduling service</p>
+        <a class="profile-card work-item" href="https://github.com/pedroforbeck/bff-agendador-tarefas" target="_blank">
+          <div class="profile-card-head">
+            <span class="profile-card-avatar">TS</span>
+            <div class="profile-card-meta">
+              <span class="work-name">Task Scheduler</span>
+              <span class="work-tag">Java · GitHub</span>
+            </div>
           </div>
-          <span class="work-tag">Java · GitHub</span>
+          <p class="work-desc">Backend-for-frontend task scheduling service</p>
         </a>
-        <a class="card-spotlight work-item" href="https://github.com/pedroforbeck/sentinel" target="_blank">
-          <div class="work-card-content">
-            <span class="work-name">Sentinel</span>
-            <p class="work-desc">Monitoring & alerting system</p>
+        <a class="profile-card work-item" href="https://github.com/pedroforbeck/sentinel" target="_blank">
+          <div class="profile-card-head">
+            <span class="profile-card-avatar">SE</span>
+            <div class="profile-card-meta">
+              <span class="work-name">Sentinel</span>
+              <span class="work-tag">Java · GitHub</span>
+            </div>
           </div>
-          <span class="work-tag">Java · GitHub</span>
+          <p class="work-desc">Monitoring & alerting system</p>
+        </a>
+      </div>
+    </section>
+
+    <section id="opensource">
+      <h2 class="shiny-text section-title">OPEN SOURCE</h2>
+
+      <div class="opensource-list">
+        <a class="profile-card work-item" href="https://github.com/Diaum/toxibr/pull/53" target="_blank">
+          <div class="profile-card-head">
+            <span class="profile-card-avatar">TX</span>
+            <div class="profile-card-meta">
+              <span class="work-name">toxibr</span>
+              <span class="work-tag">TypeScript · GitHub</span>
+            </div>
+          </div>
+          <p class="work-desc">
+            Added advanced regression tests for Issue #35 covering Zalgo combining marks, Zero-Width Joiners (\u200D), rare/inverted accents, and fixed a Jest destructuring import lint issue.
+          </p>
+        </a>
+        <a class="profile-card work-item" href="https://github.com/Facepunch/sbox-public/pull/10541" target="_blank">
+          <div class="profile-card-head">
+            <span class="profile-card-avatar">SB</span>
+            <div class="profile-card-meta">
+              <span class="work-name">sbox-public</span>
+              <span class="work-tag">SCSS · GitHub</span>
+            </div>
+          </div>
+          <p class="work-desc">
+            Fixed hover flicker near icon edges by correcting tooltip/pointer-event hitbox interactions and quoted SCSS sound-in values to resolve parser errors, addressing Issue #10329.
+          </p>
         </a>
       </div>
     </section>
