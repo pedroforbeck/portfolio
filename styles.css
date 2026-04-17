@@ -194,9 +194,22 @@ nav {
 ═══════════════════════════════ */
 #ascii-hero {
   position: relative;
-  width: clamp(280px, 95vw, 1400px);
-  height: clamp(300px, 55vw, 700px);
+  width: clamp(260px, 95vw, 1400px);
+  height: clamp(220px, 52vw, 700px);
   overflow: visible;
+}
+
+#hero-mobile-name {
+  display: none;
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .02em;
+  line-height: .92;
+  text-align: center;
+  font-size: clamp(2.4rem, 15vw, 4rem);
+  color: var(--text-color);
+  margin: 0;
 }
 
 /* Shared ASCII container styles */
@@ -628,5 +641,30 @@ footer span {
   
   footer {
     padding: 1.5rem;
+  }
+}
+
+@media (max-width: 430px) {
+  nav {
+    padding: 1rem 1rem;
+  }
+
+  #hero {
+    min-height: 92vh;
+    padding: 4.2rem 0 1.4rem;
+  }
+
+  #ascii-hero {
+    display: none;
+  }
+
+  #hero-mobile-name {
+    display: block;
+  }
+
+  .hero-content .sub {
+    margin-top: 1.2rem;
+    letter-spacing: .2em;
+    font-size: .52rem;
   }
 }

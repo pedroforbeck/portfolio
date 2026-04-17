@@ -474,18 +474,24 @@ async function initAsciiInstance(containerId, config) {
   return instance;
 }
 
-const isMobile = window.innerWidth <= 768;
-const responsiveAsciiSize = isMobile ? 3 : 7;
+const viewportWidth = window.innerWidth;
+const isSmallMobile = viewportWidth <= 430;
+const isMobile = viewportWidth <= 768;
+const responsiveAsciiSize = isSmallMobile ? 2 : (isMobile ? 3 : 7);
+const heroTextFontSize = isSmallMobile ? 170 : 280;
+const heroPlaneBaseHeight = isSmallMobile ? 13 : 18;
 
 // Hero: "Pedro\nForbeck" on two lines â€” massive, with waves
-initAsciiInstance('ascii-hero', {
-  text: 'Pedro\nForbeck',
-  asciiFontSize: responsiveAsciiSize,
-  textFontSize: 280,
-  textColor: '#fdf9f3',
-  planeBaseHeight: 18,
-  enableWaves: false
-});
+if (!isSmallMobile) {
+  initAsciiInstance('ascii-hero', {
+    text: 'Pedro\nForbeck',
+    asciiFontSize: responsiveAsciiSize,
+    textFontSize: heroTextFontSize,
+    textColor: '#fdf9f3',
+    planeBaseHeight: heroPlaneBaseHeight,
+    enableWaves: false
+  });
+}
 
 /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    Enhanced scroll reveal (IntersectionObserver)
