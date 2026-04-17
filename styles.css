@@ -199,6 +199,19 @@ nav {
   overflow: visible;
 }
 
+#hero-mobile-name {
+  display: none;
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .02em;
+  line-height: .92;
+  text-align: center;
+  font-size: clamp(2.4rem, 15vw, 4rem);
+  color: var(--text-color);
+  margin: 0;
+}
+
 /* Shared ASCII container styles */
 #ascii-hero > div,
 #ascii-projects > div {
@@ -642,8 +655,11 @@ footer span {
   }
 
   #ascii-hero {
-    width: min(96vw, 360px);
-    height: 220px;
+    display: none;
+  }
+
+  #hero-mobile-name {
+    display: block;
   }
 
   .hero-content .sub {
