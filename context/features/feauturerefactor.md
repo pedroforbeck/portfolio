@@ -1,2 +1,2 @@
-#1 - Fix Shiny Text on white mode 
-#2 - Add Lanyard component from react bits at the end of the page https://reactbits.dev/components/lanyard?cameraDistance=27, make him appear in a scroll float. Ill add things in it later
+#1 - Add a About section with a card from the gif i stashed in the root folder
+#2 - the gif must have this card style https://reactbits.dev/components/tilted-card?rotateAmplitude=28&showTooltip=false

@@ -585,3 +585,35 @@ themeToggle.addEventListener('mousemove', e => {
 themeToggle.addEventListener('mouseleave', () => {
   themeToggle.style.transform = '';
 });
+
+/* ═══════════════════════════════
+   Tilted Card Effect
+═══════════════════════════════ */
+const tiltedCards = document.querySelectorAll('.tilted-card-wrapper');
+tiltedCards.forEach(wrapper => {
+  const card = wrapper.querySelector('.tilted-card');
+  const rotateAmplitude = 28;
+
+  wrapper.addEventListener('mousemove', (e) => {
+    const rect = wrapper.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    
+    const mouseX = e.clientX - centerX;
+    const mouseY = e.clientY - centerY;
+    
+    const rotateY = (mouseX / (rect.width / 2)) * rotateAmplitude;
+    const rotateX = -(mouseY / (rect.height / 2)) * rotateAmplitude;
+    
+    card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+  });
+
+  wrapper.addEventListener('mouseleave', () => {
+    card.style.transform = `rotateX(0deg) rotateY(0deg)`;
+    card.style.transition = `transform 0.5s ease-out`;
+  });
+  
+  wrapper.addEventListener('mouseenter', () => {
+    card.style.transition = `transform 0.1s ease`;
+  });
+});
