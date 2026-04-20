@@ -20,8 +20,8 @@
     <nav>
       <a class="nav-mark" href="#">PF</a>
       <div class="nav-right">
-        <a href="#about">About</a>
         <a href="#work">Work</a>
+        <a href="#about">About</a>
         <a id="theme-toggle" style="cursor: pointer;" aria-label="Toggle Theme">Theme</a>
       </div>
     </nav>
@@ -48,19 +48,6 @@
         <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
       </a>
     </div>
-
-    <div class="section-divider"></div>
-
- <section id="about">
-      <div class="about-inner">
-        <div class="line-wipe"></div>
-        <p class="label">About</p>
-        <p class="about-body" data-char-reveal>
-          A developer obsessed with the intersection
-          of <em>logic</em> and <em>craft</em>
-        </p>
-      </div>
-    </section>
 
     <div class="section-divider"></div>
 
@@ -119,6 +106,35 @@
             Fixed hover flicker near icon edges by correcting tooltip/pointer-event hitbox interactions and quoted SCSS sound-in values to resolve parser errors, addressing Issue #10329.
           </p>
         </a>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <section id="about">
+      <div class="about-inner">
+        <div class="line-wipe"></div>
+        <p class="label">About</p>
+
+        <div class="about-content">
+          <div class="tilted-card-wrapper">
+            <div class="tilted-card">
+              <img src="me-rotation.gif" alt="Pedro Forbeck" class="tilted-card-img" />
+            </div>
+          </div>
+
+          <div class="about-text-group">
+            <h3 class="about-heading" data-char-reveal>Hi, I'm Pedro.</h3>
+            <p class="about-body" data-char-reveal>
+              A software engineer obsessed<br>
+              with the intersection of<br>
+              <em>logic</em> and <em>craft</em>.
+            </p>
+            <p class="about-sub" data-char-reveal>
+              I specialize in creating engaging interfaces, robust backends, and systems that scale.
+            </p>
+          </div>
+        </div>
       </div>
     </section>
 
